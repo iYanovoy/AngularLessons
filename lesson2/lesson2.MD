@@ -27,8 +27,7 @@ Introduction
 
 После чего, мы получаем досутп к стартовой странице, по адресу [http://localhost:4200/](http://localhost:4200/)
 
-![Angular Welcome Page](./assets/img/AngularWelcomeScreen.png)
-
+![Альтернативный текст](/путь/к/изображению.jpg)
 
 Основные команды Angular CLI (не забываем обращаться через *ng*):
 * build *<название вашего приложения>* [опции]
