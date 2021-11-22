@@ -17,6 +17,7 @@ Typescript
 14) <a href="#alias">Псевдонимы("Alias") типа</a>
 15) <a href="#literal">Тип строкового литерала</a>
 16) <a href="#this">Полиморфный тип this</a>
+16) <a href="#interface">Интерфейс</a>
 
 ### Строгая(или не очень) типизация
 
@@ -323,3 +324,88 @@ P.S. в новых версиях не работает, нужно провер
 
 > let v = new BasicCalculator(2).multiply(5).add(1).currentValue();
 
+## <b id=interface>Интерфейс</b>
+
+Используется для объявления сложного типа. Если вкратце, то используется для объявления структуры объекта, класса. 
+
+> interface User {
+>   name: string;
+>   age: number;
+>   getYearOfBorn: () => number
+> }
+
+Также может содержать в себе другие интерфейсы:
+
+> interface Admin {
+>   adminInfo: User;
+>   isSecurityAdmin: boolean;
+> }
+
+В случае, если поле может быть, а может и не быть (поле Шрёдингера),
+можно воспользоваться опциональным полем (вопросительный знак перед двоеточием с указанием типа):
+
+> interface Admin {
+>   adminInfo: User;
+>   isSecurityAdmin: boolean;
+>   hasAccess?: boolean;
+> }
+
+Для случаев, когда нужно запретить изменять поле, мы можем указать что поле будет изменяемым только при создании объекта:
+
+> interface Admin {
+>   adminInfo: User;
+>   isSecurityAdmin: boolean;
+>   hasAccess?: boolean;
+>   readonly securityToken: string;
+> }
+
+Если мы хотим указать, что будут какие-то дополнительные поля, определенного типа, то можно воспользоваться такой конструкцией:
+> interface Admin {
+>   adminInfo: User;
+>   isSecurityAdmin: boolean;
+>   hasAccess?: boolean;
+>   readonly securityToken: string;
+>   [propName: string]: any;
+> }
+
+И аналогично для массивов: 
+
+> interface StringArray {
+>   [index: number]: string;
+> }
+
+Для того чтобы объявить что класс должен реализовывать данный интерфейс, существует ключевая конструкция `implements`:
+
+> class AdminClass implements Admin {
+>   //*Какой-то код*
+> }
+
+Интерфейсы могут расширять друг друга, подобно классам. Это позволяет копировать члены одного интерфейса в другой, что дает больше гибкости при разделении интерфейсов на переиспользуемые компоненты.
+
+> interface Shape {
+>   color: string;
+> }
+
+> interface Square extends Shape {
+>   sideLength: number;
+> }
+
+Интерфейс может расширять сразу несколько других интерфейсов, создавая их комбинацию:
+
+> interface Shape {
+>   color: string;
+> }
+
+> interface PenStroke {
+>   penWidth: number;
+> }
+
+> interface Square extends Shape, PenStroke {
+>   sideLength: number;
+> }
+
+### HomeWork 
+
+1) Придумать область, с которой будет связан ваш проект.  
+2) Описать несколько базовых интерфейсов относящихся к вашей теме (interface User, Car, Shop).
+3) Создать новые интерфейсы, которые расширяют базовые.
